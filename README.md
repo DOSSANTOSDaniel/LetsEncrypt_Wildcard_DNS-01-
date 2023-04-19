@@ -37,7 +37,7 @@ Aller sur la page <https://console.online.net/fr/api/access> pour récupérer le
 ## Description des fichiers
 |Fichier|Description|
 |:---:|:---:|
-|install_online.md|Tutoriel.|
+|tuto_install.md|Tutoriel.|
 |install_certs.sh|Script de création de certificats.|
 |script_after_renew.sh|Script d'automatisation du renouvellement des certificats.|
 
