@@ -5,7 +5,8 @@ Le but est de créer des certificats wildcard valables pour tous les sous-domain
 
 Ce script permet la création d'un certificat wildcard pour un domaine donné dans le but d'avoir plusieurs sous domaines certifiés.
 
-Exemple avec le domaine exemple.ex:
+Exemple avec le domaine exemple.ex.
+
 ![Haproxy](ha.png)
 
 J’utilise Online.net nouvellement appelé Scaleway pour acquérir un nom de domaine et configurer mes zones DNS.
