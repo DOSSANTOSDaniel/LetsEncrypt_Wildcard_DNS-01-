@@ -38,8 +38,7 @@ Vous pouvez soit utiliser le tutoriel soit le script.
 1. Ouvrir le fichier tuto_install.md et suivre les étapes.
 
 **Utilisation du script:**
-1. Récupération du Token:
-Aller sur la page <https://console.online.net/fr/api/access> pour récupérer le token permettant de s'authentifier auprès de l'API de online.net.
+1. Aller sur la page <https://console.online.net/fr/api/access> pour récupérer le token permettant de s'authentifier auprès de l'API de online.net.
 2. Lancer le script install_certs.sh
 ```bash
 ./install_certs.sh
