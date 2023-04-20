@@ -159,6 +159,7 @@ then
     sudo systemctl disable $service
     sudo rm -rf /etc/systemd/system/${service}
   done
+  sudo systemctl daemon-reload
 fi
 
 # Remove certificates if exist
@@ -190,7 +191,7 @@ then
     fi
   done
 else
-  echo "Ce script est utilisable seulement sur Ubuntu ou Debian"
+  echo "Ce script est utilisable seulement sur Ubuntu/Debian"
   exit 1
 fi
 
@@ -278,6 +279,8 @@ do
   sudo chmod 644 /etc/systemd/system/"${sysd_file}"
   sudo systemctl enable "$sysd_file"
 done
+
+sudo systemctl daemon-reload
 
 # Informations
 echo -e "\n Certificats \n"
