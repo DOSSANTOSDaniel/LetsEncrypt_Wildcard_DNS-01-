@@ -5,11 +5,13 @@ Le but est de créer des certificats wildcard valables pour tous les sous-domain
 
 Création d'un certificat wildcard pour un domaine donné dans le but d'avoir plusieurs sous domaines certifiés.
 
+Renouvellement automatique des certificats en utilisant un challenge DNS-01, la modification automatique des zones DNS se fait à l'aide du plugin certbot-dns-online.
+
 Exemple avec le domaine exemple.ex.
 
 ![Haproxy](ha.png)
 
-J’utilise Online.net nouvellement appelé Scaleway pour acquérir un nom de domaine et configurer mes zones DNS.
+J’utilise Online.net nouvellement appelé Scaleway pour acquérir un nom de domaine et configurer mes zones DNS, je parle ici de l'ajout des alias concernant mes sous domaines, exemple: web.exemple.ex, next.exemple.ex...
 
 J'utilise mon serveur Haproxy en tant que reverse proxy.
 
@@ -30,10 +32,12 @@ Liens du plugin: <https://pypi.org/project/certbot-dns-online/>
 
 ## Étape par étape
 J'ai créer un tutoriel et aussi un script pour automatiser le tout.
-Utilisation du tutoriel:
+Vous pouvez soit utiliser le tutoriel soit le script.
+
+**Utilisation du tutoriel:**
 1. Ouvrir le fichier tuto_install.md et suivre les étapes.
 
-Utilisation du script:
+**Utilisation du script:**
 1. Récupération du Token:
 Aller sur la page <https://console.online.net/fr/api/access> pour récupérer le token permettant de s'authentifier auprès de l'API de online.net.
 2. Lancer le script install_certs.sh
@@ -48,4 +52,3 @@ Aller sur la page <https://console.online.net/fr/api/access> pour récupérer le
 |tuto_install.md|Tutoriel.|
 |install_certs.sh|Script de création de certificats.|
 |script_after_renew.sh|Script d'automatisation du renouvellement des certificats.|
-
