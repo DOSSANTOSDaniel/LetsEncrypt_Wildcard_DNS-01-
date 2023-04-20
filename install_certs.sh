@@ -168,7 +168,7 @@ then
   echo "Pour supprimer le certificat : "
   echo "sudo certbot delete --cert-name $domain_name"
   echo "sudo rm -rf /etc/letsencrypt/live/${domain_name}"
-  exit 0
+  read -r -p "Si vous voulez conserver vos certificats appuyer sur Enter, si non Ctrl+c pour quitter !"
 fi
 
 # Install Certbot and dependencies
