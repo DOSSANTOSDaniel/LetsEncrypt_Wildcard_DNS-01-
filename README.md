@@ -13,7 +13,7 @@ Exemple avec le domaine exemple.ex.
 
 J’utilise Online.net nouvellement appelé Scaleway pour acquérir un nom de domaine et configurer mes zones DNS, je parle ici de l'ajout des alias concernant mes sous domaines, exemple: web.exemple.ex, next.exemple.ex...
 
-J'utilise mon serveur Haproxy en tant que reverse proxy.
+J'utilise mon serveur Haproxy en tant que reverse proxy, mes sous domaines servent de point d'entrée par la suite HAproxy redirige le flux vers une machine locale.
 
 Je n'aborde pas ici les configuration des zones DNS n'y l'installation et la configuration de HAproxy.
 
