@@ -31,7 +31,7 @@ c'est une version expérimental, mais déjà largement utilisée.
 Liens du plugin: <https://pypi.org/project/certbot-dns-online/>
 
 ## Étape par étape
-J'ai créer un tutoriel et aussi un script pour automatiser le tout.
+J'ai créé un tutoriel et aussi un script pour automatiser le tout.
 Vous pouvez soit utiliser le tutoriel soit le script.
 
 **Utilisation du tutoriel:**
