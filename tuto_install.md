@@ -9,26 +9,26 @@ Dans ce tutoriel, on va prendre comme exemple la création d'un certificat wildc
 
 ![Haproxy](ha.png)
 
-Pour cette exemple j’utilise Online.net nouvellement appelé Scaleway pour acquérir un nom de domaine et configurer mes zones DNS.
+Pour cet exemple, j’utilise Online.net nouvellement appelé Scaleway pour acquérir un nom de domaine et configurer mes zones DNS.
 
 J'utilise mon serveur Haproxy en tant que reverse proxy.
 
 ## Les besoins
-* Avoir achetez un nom de domaine chez <https://console.online.net/fr/login>
-* Avoir un ordinateur avec ubuntu/debian avec Haproxy.
+* Acheter un nom de domaine chez <https://console.online.net/fr/login>
+* Un ordinateur avec Ubuntu/Debian avec Haproxy.
 
-Récupération du Token:
-Aller sur la page <https://console.online.net/fr/api/access> pour récupérer le token permettant de s'authentifier auprès de l'API de online.net.
+Récupération du Token :
+Aller sur la page <https://console.online.net/fr/api/access> pour récupérer le token permettant de s'authentifier auprès de l'API d'online.net.
 
 ## Le plugin à utiliser pour le challenge DNS-01 sur online.net
-Le plugin certbot-dns-online permet à Certbot de se connecter à l'API d'online.net dans le but de modifier les zones DNS c'est de cette manière qu'on pourra utiliser le challenge DNS-01 et ainsi avoir un renouvellement des certificats automatiquement.
+Le plugin certbot-dns-online permet à Certbot de se connecter à l'API d'online.net dans le but de modifier les zones DNS, c'est de cette manière qu'on pourra utiliser le challenge DNS-01 et ainsi avoir un renouvellement des certificats automatiquement.
 
-certbot-dns-online est un plugin fournis par d'autres développeurs que ceux du projet Certbot,
-c'est une version expérimental, mais déjà largement utilisée.
+certbot-dns-online est un plugin fourni par d'autres développeurs que ceux du projet Certbot,
+c'est une version expérimentale, mais déjà largement utilisée.
 
-Liens du plugin: <https://pypi.org/project/certbot-dns-online/>
+Liens du plugin : <https://pypi.org/project/certbot-dns-online/>
 
-## Désinstallation d'anciennes version de Certbot
+## Désinstallation d'anciennes versions de Certbot
 ```bash
 sudo apt-get remove certbot --purge -y
 ```
@@ -39,7 +39,7 @@ sudo systemctl is-active certbot.timer
 sudo systemctl is-active certbot.service
 ```
 
-Si c'est le cas alors ils faut les désactiver et par la suite les supprimer.
+Si c'est le cas, alors il faut les désactiver et par la suite les supprimer.
 ```bash
 sudo systemctl stop certbot.timer
 sudo systemctl disable certbot.timer
@@ -52,7 +52,7 @@ sudo rm -rf /etc/systemd/system/certbot.service
 sudo systemctl daemon-reload
 ```
 
-Si jamais vous avez déjà obtenu un certificat par le passé vous pouvez soit le supprimer soit le conserver et continuer.
+Si jamais vous avez déjà obtenu un certificat par le passé, vous pouvez soit le supprimer, soit le conserver et continuer.
 
 Pour supprimer un certificat.
 ```bash 
@@ -79,7 +79,7 @@ Lien symbolique de Certbot vers le $PATH.
 sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot
 ```
 
-Création d'un dossier pour accueillir le fichier d'authentification à utiliser pour se connecter à l'API de online.net.
+Création d'un dossier pour accueillir le fichier d'authentification à utiliser pour se connecter à l'API d'online.net.
 ```bash
 sudo mkdir -p /etc/letsencrypt/.secrets
 ```
@@ -112,7 +112,7 @@ Adapter avec votre nom de domaine et votre adresse email.
 
 La valeur 900 indique que Certbot doit attendre la propagation des nouvelles entrées DNS pendant 15 minutes.
 
-Une fois que vous avez votre certificat vous pouvez l'utiliser avec n'importe quel autre service.
+Une fois que vous avez votre certificat, vous pouvez l'utiliser avec n'importe quel autre service.
 
 
 Concaténation de la clé privée et du certificat fullchain en un seul fichier dans le but de l'utiliser plus tard avec Haproxy en mode reverse proxy.
@@ -136,14 +136,14 @@ sudo certbot certificates
 Chaque certificat expire au bout de 90 jours.
 Certbot va être lancé pour vérifier tous les jours si les certificats sont encore valides, à moins de 30 jours de la date d'expiration, Certbot renouvelle les certificats installés.
 
-Pour le renouvellement des certificats Certbot va utiliser les mêmes options qui on été utilisées à la créations de ces certificats.
+Pour le renouvellement des certificats, Certbot va utiliser les mêmes options qui ont été utilisées à la création de ces certificats.
 
 Création d'un script pour l'automatisation du renouvellement des certificats.
 ```bash
 nano script_after_renew.sh
 ```
 
-Modifier juste la variable exemple.ex pour l'adapter selon votre nom de domaine.
+Modifier juste la variable domain_name pour l'adapter selon votre nom de domaine.
 ```bash
 #!/bin/bash
 
@@ -169,7 +169,7 @@ Rendre le script exécutable.
 sudo chmod +x script_after_renew.sh
 ```
 
-Copier le script dans /etc/letsencrypt/renewal-hooks/deploy/, le dossier deploy peut contenir des scripts, ces scripts sont exécutés une fois le renouvellement des certificat terminé avec succès.
+Copier le script dans /etc/letsencrypt/renewal-hooks/deploy/, le dossier deploy peut contenir des scripts, ces scripts sont exécutés une fois le renouvellement des certificats terminé avec succès.
 
 Le script sera donc lancé seulement si le renouvellement des certificats s'est déroulé sans erreurs.
 ```bash
@@ -177,9 +177,9 @@ sudo cp script_after_renew.sh /etc/letsencrypt/renewal-hooks/deploy/
 ```
 
 ## Configuration de systemd
-Création du timer (déclencheur), on va utiliser systemd pour mettre en plage les vérifications quotidienne des certificats avec la commande(certbot --quiet renew --cert-name exemple.ex).
+Création du timer(déclencheur), on va utiliser systemd pour mettre en plage les vérifications quotidienne des certificats avec la commande(certbot --quiet renew --cert-name exemple.ex).
 
-La vérification se déclenche tous les jours à 4h du matin à ce moment là le fichier timer va lancer le service (certbot.service) et ainsi lancer la vérification de validité des certificats.
+La vérification se déclenche tous les jours à 4h du matin, à ce moment-là, le fichier timer va lancer le service (certbot.service) et ainsi lancer la vérification de validité des certificats.
 ```bash
 nano /etc/systemd/system/certbot.timer
 ```
@@ -197,7 +197,7 @@ Persistent=true
 WantedBy=timers.target
 ```
 
-Le fichier service, quand il sera déclenché par le timer associé il lancera Certbot qui fera un test pour vérifier si le certificat est encore à jour si non il démarrera le renouvellement.
+Le fichier service, quand il sera déclenché par le timer associé, il lancera Certbot qui fera un test pour vérifier si le certificat est encore à jour, sinon il démarrera le renouvellement.
 ```bash
 nano /etc/systemd/system/certbot.service
 ```
@@ -214,7 +214,7 @@ ExecStart=/usr/bin/certbot --quiet renew --cert-name exemple.ex
 [Install]
 WantedBy=multi-user.target
 ```
-Si on n'indique pas l'option --cert-name alors tous les certificats seront vérifiés et s'ils ne sont plus valides il serons tous renouvelés.
+Si on n'indique pas l'option --cert-name alors tous les certificats seront vérifiés et s'ils ne sont plus valides, ils seront tous renouvelés.
 
 Applications des droits pour timer et service.
 ```bash
@@ -268,5 +268,5 @@ Afficher le statut du timer.
 sudo systemctl status certbot.timer
 ```
 
-Par la suite il ne vous reste plus qu'à modifier votre zone DNS afin de créer des alias CNAME pour chaque sous domaine que vous voulez utiliser.
+Par la suite, il ne vous reste plus qu'à modifier votre zone DNS afin de créer des alias CNAME pour chaque sous domaine que vous voulez utiliser.
 
