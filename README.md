@@ -1,4 +1,4 @@
-# Certificats Let’s Encrypt Wildcard avec Certbot en utilisant un challenge DNS-01 automatique pour un serveur Haproxy
+# Certificats Let’s Encrypt Wildcard avec Certbot en utilisant un challenge DNS-01 automatique sur online.net à utiliser avec un reverse-proxy (Haproxy)
 
 ## Contexte
 Le but est de créer des certificats wildcard valables pour tous les sous-domaines d'un domaine donné, de manière automatique, pas besoin de créer un nouveau certificat pour chaque nouveau sous-domaine.
